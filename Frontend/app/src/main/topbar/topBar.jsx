@@ -12,11 +12,26 @@ import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import { MoreOptions } from './moreOptions';
 import { useState } from 'react';
 
-export function TopBar({ toolBarWidth, setToolBarWidth, setPage }) {
+export function TopBar({
+  toolBarWidth,
+  setToolBarWidth,
+  setPage,
+  layers,
+  setLayers,
+}) {
   const [moreIsOpen, setMoreIsOpen] = useState(false);
 
   function toggleMoreIsOpen() {
     setMoreIsOpen(!moreIsOpen);
+  }
+
+  function newLayerHandler() {
+    setLayers([
+      ...layers,
+      {
+        name: 'Layer ' + layers.length,
+      },
+    ]);
   }
 
   return (
@@ -57,8 +72,17 @@ export function TopBar({ toolBarWidth, setToolBarWidth, setPage }) {
           flexItem
           sx={{ mr: 1 }}
         />
-        <Button>Layer 1</Button>
-        <IconButton size="small" color="success" ml={1}>
+        {layers.map((layer) => (
+          <Button color="secondary" sx={{ mr: 0.5, textTransform: 'none' }}>
+            {layer.name}
+          </Button>
+        ))}
+        <IconButton
+          size="small"
+          color="success"
+          ml={1}
+          onClick={newLayerHandler}
+        >
           <AddCircleIcon />
         </IconButton>
       </Box>

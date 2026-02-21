@@ -7,8 +7,9 @@ import { Grid, Box, Container, Paper } from '@mui/material';
 
 export function MainEditor({ setPage }) {
   const [toolBarWidth, setToolBarWidth] = useState(20);
-
   const topBarHeight = '2em';
+
+  const [layers, setLayers] = useState([]);
 
   return (
     <Container
@@ -25,6 +26,8 @@ export function MainEditor({ setPage }) {
           toolBarWidth={toolBarWidth}
           setToolBarWidth={setToolBarWidth}
           setPage={setPage}
+          layers={layers}
+          setLayers={setLayers}
         />
       </Box>
       <Box
