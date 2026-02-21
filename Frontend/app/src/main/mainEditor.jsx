@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-import { TimeLine } from './timeline/timeLine';
 import { ToolBar } from './toolbar/toolBar';
 import { VideoPreview } from './preview/videoPreview';
 import { TopBar } from './topbar/topBar';
 
 import { Grid, Box, Container, Paper } from '@mui/material';
 
-export function MainEditor() {
-  const [toolBarWidth, setToolBarWidth] = useState('20em');
-  const [timeLineHeight, setTimeLineHeight] = useState('12em');
+export function MainEditor({ setPage }) {
+  const [toolBarWidth, setToolBarWidth] = useState(20);
 
   const topBarHeight = '2em';
 
@@ -23,22 +21,23 @@ export function MainEditor() {
       }}
     >
       <Box display={'flex'} width={'100vw'} height={topBarHeight}>
-        <TopBar />
+        <TopBar
+          toolBarWidth={toolBarWidth}
+          setToolBarWidth={setToolBarWidth}
+          setPage={setPage}
+        />
       </Box>
       <Box
         display={'flex'}
         width={'100vw'}
-        style={{ height: `calc(100vh - ${topBarHeight} - ${timeLineHeight})` }}
+        style={{ height: `calc(100vh - ${topBarHeight})` }}
       >
-        <Box style={{ width: `calc(100vw - ${toolBarWidth})` }}>
+        <Box style={{ width: `calc(100vw - ${toolBarWidth}em)` }}>
           <VideoPreview />
         </Box>
-        <Box width={toolBarWidth}>
+        <Box width={`${toolBarWidth}em`}>
           <ToolBar />
         </Box>
-      </Box>
-      <Box display={'flex'} width={'100vw'} height={timeLineHeight}>
-        <TimeLine />
       </Box>
     </Container>
   );
