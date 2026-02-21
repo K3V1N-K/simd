@@ -1,0 +1,8 @@
+Building Frontend
+
+1. Install NPM (on mac, easy way is to use Brew and Brew -i npm)
+2. Navigate to Frontend/app
+3. install dependency with command: npm install
+4. start server with command: npm run dev
+
+Building Backend
