@@ -10,6 +10,7 @@ export function MainEditor({ setPage }) {
   const topBarHeight = '2em';
 
   const [layers, setLayers] = useState([]);
+  const [activeLayerId, setActiveLayerId] = useState();
 
   return (
     <Container
@@ -28,6 +29,8 @@ export function MainEditor({ setPage }) {
           setPage={setPage}
           layers={layers}
           setLayers={setLayers}
+          activeLayerId={activeLayerId}
+          setActiveLayerId={setActiveLayerId}
         />
       </Box>
       <Box

@@ -18,6 +18,8 @@ export function TopBar({
   setPage,
   layers,
   setLayers,
+  activeLayerId,
+  setActiveLayerId,
 }) {
   const [moreIsOpen, setMoreIsOpen] = useState(false);
 
@@ -30,6 +32,7 @@ export function TopBar({
       ...layers,
       {
         name: 'Layer ' + layers.length,
+        id: layers.length,
       },
     ]);
   }
@@ -73,7 +76,14 @@ export function TopBar({
           sx={{ mr: 1 }}
         />
         {layers.map((layer) => (
-          <Button color="secondary" sx={{ mr: 0.5, textTransform: 'none' }}>
+          <Button
+            color="success"
+            sx={{ mr: 0.5, textTransform: 'none' }}
+            variant={activeLayerId == layer.id ? 'contained' : 'text'}
+            onClick={() => {
+              setActiveLayerId(layer.id);
+            }}
+          >
             {layer.name}
           </Button>
         ))}
