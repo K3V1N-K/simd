@@ -6,3 +6,11 @@ Building Frontend
 4. start server with command: npm run dev
 
 Building Backend
+
+1. Use your preferred method to compile and run main.cpp
+
+To run
+
+1. start Backend
+2. start Frontend
+3. Go to http://localhost:5173/

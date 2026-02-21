@@ -1,9 +1,8 @@
 import { Typography, Paper, Divider, Button, Box } from '@mui/material';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getGreeting, turnOffServer } from '../services/services';
 
-export function LandingPage() {
+export function LandingPage({ setPage }) {
   const [status, setStatus] = useState('loading...');
 
   useEffect(() => {
@@ -18,7 +17,9 @@ export function LandingPage() {
     load();
   }, []);
 
-  function handleToProgram() {}
+  function handleToProgram() {
+    setPage('main');
+  }
 
   async function handleServerQuit() {
     await turnOffServer();
@@ -34,7 +35,11 @@ export function LandingPage() {
   return (
     <Paper sx={{ p: 4, pb: 1 }} elevation={3}>
       <Typography variant="h3" align="center">
-        <b>SIMD Demo</b>
+        <b>
+          SIMD
+          <br />
+          Draw on video
+        </b>
       </Typography>
       <Divider>CECS 574-03 </Divider>
       <Typography align="center" variant="subtitle2">
