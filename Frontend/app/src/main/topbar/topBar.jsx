@@ -75,26 +75,37 @@ export function TopBar({
           flexItem
           sx={{ mr: 1 }}
         />
-        {layers.map((layer) => (
-          <Button
-            color="success"
-            sx={{ mr: 0.5, textTransform: 'none' }}
-            variant={activeLayerId == layer.id ? 'contained' : 'text'}
-            onClick={() => {
-              setActiveLayerId(layer.id);
-            }}
-          >
-            {layer.name}
-          </Button>
-        ))}
-        <IconButton
+        <Box
+          sx={{
+            flex: 1,
+            overflowX: 'scroll',
+            flexDirection: 'row',
+            alignContent: 'center',
+          }}
+        >
+          {layers.map((layer) => (
+            <Button
+              color="success"
+              size="small"
+              sx={{ mr: 0.5, textTransform: 'none' }}
+              variant={activeLayerId == layer.id ? 'contained' : 'text'}
+              onClick={() => {
+                setActiveLayerId(layer.id);
+              }}
+            >
+              {layer.name}
+            </Button>
+          ))}
+        </Box>
+        <Button
           size="small"
           color="success"
           ml={1}
+          sx={{ p: 0 }}
           onClick={newLayerHandler}
         >
           <AddCircleIcon />
-        </IconButton>
+        </Button>
       </Box>
       <Tooltip
         title={
@@ -121,7 +132,7 @@ export function TopBar({
         }}
       >
         <Button
-          sx={{ maxHeight: '100%', textTransform: 'none' }}
+          sx={{ maxHeight: '100%', minWidth: '10em', textTransform: 'none' }}
           endIcon={
             moreIsOpen ? <ExpandLessOutlinedIcon /> : <ExpandMoreOutlinedIcon />
           }
