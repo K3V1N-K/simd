@@ -19,14 +19,16 @@ export function LayerNamer({ layers, setLayers, activeLayerId }) {
   useEffect(() => {
     debouncedName.current = name;
     async function runDebouncedInput() {
-      debouncedInProgress.current = true;
-      await new Promise((r) => setTimeout(r, 500)); // sleep 500 ms
-      debouncedInProgress.current = false;
-
       const newLayers = [...layers];
       const editingLayer = newLayers.find(
         (layer) => layer.id === activeLayerId,
       );
+      if (!editingLayer?.name) return;
+
+      debouncedInProgress.current = true;
+      await new Promise((r) => setTimeout(r, 500)); // sleep 500 ms
+      debouncedInProgress.current = false;
+
       editingLayer.name =
         debouncedName.current.length > 0 ? debouncedName.current : '--';
       setLayers(newLayers);

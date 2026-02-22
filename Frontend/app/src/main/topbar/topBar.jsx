@@ -85,6 +85,7 @@ export function TopBar({
         >
           {layers.map((layer) => (
             <Button
+              key={layer.id}
               color="success"
               size="small"
               sx={{ mr: 0.5, textTransform: 'none' }}
