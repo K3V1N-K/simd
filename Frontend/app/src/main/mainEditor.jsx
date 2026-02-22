@@ -42,7 +42,12 @@ export function MainEditor({ setPage }) {
           <VideoPreview />
         </Box>
         <Box width={`${toolBarWidth}em`}>
-          <ToolBar />
+          <ToolBar
+            layers={layers}
+            setLayers={setLayers}
+            activeLayerId={activeLayerId}
+            setActiveLayerId={setActiveLayerId}
+          />
         </Box>
       </Box>
     </Container>
