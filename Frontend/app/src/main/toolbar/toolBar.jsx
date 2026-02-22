@@ -1,6 +1,7 @@
 import { TextField, Paper, Divider, Button, Box } from '@mui/material';
 import { useState, useEffect, useRef } from 'react';
 import { LayerNamer } from './layerNamer';
+import { LayerOrderer } from './layerOrderer';
 
 export function ToolBar({
   layers,
@@ -15,6 +16,12 @@ export function ToolBar({
         layers={layers}
         setLayers={setLayers}
         activeLayerId={activeLayerId}
+      />
+      <LayerOrderer
+        layers={layers}
+        setLayers={setLayers}
+        activeLayerId={activeLayerId}
+        setActiveLayerId={setActiveLayerId}
       />
     </Paper>
   );
