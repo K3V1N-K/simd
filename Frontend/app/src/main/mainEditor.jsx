@@ -12,6 +12,10 @@ export function MainEditor({ setPage }) {
   const [layers, setLayers] = useState([]);
   const [activeLayerId, setActiveLayerId] = useState();
 
+  const [brush, setBrush] = useState({
+    color: '#ffffff',
+  });
+
   return (
     <Container
       disableGutters
@@ -47,6 +51,8 @@ export function MainEditor({ setPage }) {
             setLayers={setLayers}
             activeLayerId={activeLayerId}
             setActiveLayerId={setActiveLayerId}
+            brush={brush}
+            setBrush={setBrush}
           />
         </Box>
       </Box>

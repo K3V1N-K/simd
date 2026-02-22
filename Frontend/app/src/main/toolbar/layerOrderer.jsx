@@ -1,29 +1,11 @@
-import {
-  TextField,
-  Paper,
-  Divider,
-  Button,
-  Box,
-  Select,
-  MenuItem,
-  Typography,
-  IconButton,
-  Chip,
-} from '@mui/material';
-import { useState, useEffect, useRef } from 'react';
-import { LayerNamer } from './layerNamer';
+import { Box, Typography, IconButton, Chip } from '@mui/material';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 
-export function LayerOrderer({
-  layers,
-  setLayers,
-  activeLayerId,
-  setActiveLayerId,
-}) {
+export function LayerOrderer({ layers, setLayers, activeLayerId }) {
   function handleMoveUp() {
     const currentLayerIdx = layers.findIndex(
       (layer) => layer.id === activeLayerId,

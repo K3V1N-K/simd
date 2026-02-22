@@ -1,15 +1,16 @@
-import { TextField, Paper, Divider, Button, Box } from '@mui/material';
-import { useState, useEffect, useRef } from 'react';
+import { Divider, Paper } from '@mui/material';
 import { LayerNamer } from './layerNamer';
 import { LayerOrderer } from './layerOrderer';
+import { BrushOptions } from './brushOptions';
 
 export function ToolBar({
   layers,
   setLayers,
   activeLayerId,
   setActiveLayerId,
+  brush,
+  setBrush,
 }) {
-  function handleEdit() {}
   return (
     <Paper elevation={3} sx={{ backgroundColor: '#E5E4E2', height: '100%' }}>
       <LayerNamer
@@ -23,6 +24,7 @@ export function ToolBar({
         activeLayerId={activeLayerId}
         setActiveLayerId={setActiveLayerId}
       />
+      <BrushOptions brush={brush} setBrush={setBrush} />
     </Paper>
   );
 }
