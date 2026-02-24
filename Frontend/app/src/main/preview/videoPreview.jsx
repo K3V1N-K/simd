@@ -3,15 +3,8 @@ import { useEffect, useRef } from 'react';
 import { fetchFile } from '../../services/services';
 import ReactPlayer from 'react-player';
 
-export function VideoPreview({ path, selectedVideo }) {
-  const playerRef = useRef(null);
-
-  useEffect(() => {
-    async function getData() {
-      let video = await fetchFile(path + selectedVideo);
-    }
-    getData();
-  }, [selectedVideo]);
+export function VideoPreview({ path, selectedVideo, playerRef }) {
+  useEffect(() => {}, [selectedVideo]);
 
   return (
     <Box height={'100%'}>
@@ -23,7 +16,7 @@ export function VideoPreview({ path, selectedVideo }) {
         pip={false}
         onTimeUpdate={(e, i) => {
           //console.log(e.target.currentTime);
-          console.log(playerRef.current.currentTime);
+          console.log(playerRef.current);
           //playerRef.current.currentTime = 10;
           //playerRef.current = 100;
         }}

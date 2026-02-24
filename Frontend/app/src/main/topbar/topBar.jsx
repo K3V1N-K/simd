@@ -46,6 +46,8 @@ export function TopBar({
       {
         name: 'New layer ' + layers.length,
         id: layers.length,
+        start: 0,
+        end: 1000,
       },
     ]);
   }
