@@ -12,6 +12,9 @@ export function MainEditor({ setPage }) {
   const [layers, setLayers] = useState([]);
   const [activeLayerId, setActiveLayerId] = useState();
 
+  const [path, setPath] = useState('./');
+  const [selectedVideo, setSelectedVideo] = useState('');
+
   const [brush, setBrush] = useState({
     color: '#ffffff',
   });
@@ -35,6 +38,10 @@ export function MainEditor({ setPage }) {
           setLayers={setLayers}
           activeLayerId={activeLayerId}
           setActiveLayerId={setActiveLayerId}
+          path={path}
+          setPath={setPath}
+          selectedVideo={selectedVideo}
+          setSelectedVideo={setSelectedVideo}
         />
       </Box>
       <Box

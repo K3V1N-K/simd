@@ -7,7 +7,7 @@ Building Frontend
 
 Building Backend
 
-1. Use your preferred method to compile and run main.cpp
+1. Use your preferred method to compile and run main.cpp using the c++ 17 standard (tested using g++ --std=c++17 main.cpp)
 
 To run
 

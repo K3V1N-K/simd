@@ -1,5 +1,6 @@
 #include "../lib/httplib.h"
 #include "routes/hello.hpp"
+#include "routes/listFiles.hpp"
 #include "routes/stop.hpp"
 
 #include <iostream>
@@ -15,10 +16,6 @@ int main() {
 
   httplib::Server svr;
 
-  // routes
-  hello(CLIENT_URL, &svr, "/hi");
-  stop(CLIENT_URL, &svr, "/stopserver");
-
   // preflight check for cross-origin
   svr.Options("/(.*)",
               [&](const httplib::Request &req, httplib::Response &res) {
@@ -28,7 +25,12 @@ int main() {
                 res.set_header("Connection", "close");
               });
 
-  // start server
+  // routes
+  hello(CLIENT_URL, &svr, "/hi");
+  stop(CLIENT_URL, &svr, "/stopserver");
+  listFiles(CLIENT_URL, &svr, "/ls");
+
+    // start server
   svr.listen(PATH, PORT);
 
   std::cout << "Exiting Main";

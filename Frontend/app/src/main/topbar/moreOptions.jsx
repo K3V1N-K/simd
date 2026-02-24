@@ -48,14 +48,6 @@ export function MoreOptions({ toolBarWidth, setToolBarWidth, setPage }) {
       >
         Back to title
       </Button>
-      <Button
-        fullWidth
-        size="small"
-        color="error"
-        startIcon={<PowerSettingsNewOutlinedIcon />}
-      >
-        Shutdown Server
-      </Button>
       <Divider sx={{ mt: 0.5, mb: 0.5 }} textAlign="left">
         User Preferences
       </Divider>
