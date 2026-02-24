@@ -1,4 +1,5 @@
 #include "../lib/httplib.h"
+#include "routes/getVideo.hpp"
 #include "routes/hello.hpp"
 #include "routes/listFiles.hpp"
 #include "routes/stop.hpp"
@@ -29,8 +30,9 @@ int main() {
   hello(CLIENT_URL, &svr, "/hi");
   stop(CLIENT_URL, &svr, "/stopserver");
   listFiles(CLIENT_URL, &svr, "/ls");
+  getVideo(CLIENT_URL, &svr, "/video");
 
-    // start server
+  // start server
   svr.listen(PATH, PORT);
 
   std::cout << "Exiting Main";

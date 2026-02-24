@@ -50,7 +50,7 @@ export function MainEditor({ setPage }) {
         style={{ height: `calc(100vh - ${topBarHeight})` }}
       >
         <Box style={{ width: `calc(100vw - ${toolBarWidth}em)` }}>
-          <VideoPreview />
+          <VideoPreview path={path} selectedVideo={selectedVideo} />
         </Box>
         <Box width={`${toolBarWidth}em`}>
           <ToolBar
