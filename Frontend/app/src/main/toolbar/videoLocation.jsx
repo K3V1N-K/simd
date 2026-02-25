@@ -37,7 +37,7 @@ export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
         <Slider
           disabled={activeLayerId == undefined}
           value={
-            layers[activeLayerId]
+            layers[activeLayerId]?.start && layers[activeLayerId]?.end
               ? [layers[activeLayerId].start, layers[activeLayerId].end]
               : [0, 1]
           }
@@ -46,7 +46,9 @@ export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
           min={0}
           max={playerRef?.current?.duration ?? 1}
           valueLabelFormat={(e) =>
-            `${Math.floor(e / 60)}:${e % 60 < 10 ? '0' : ''}${(e % 60).toFixed(0)}`
+            playerRef?.current?.currentTime
+              ? `${String(Math.floor(playerRef.current.currentTime / 60)).padStart(2, '0')}:${String(Math.floor(playerRef.current.currentTime % 60)).padStart(2, '0')}`
+              : '--:--'
           }
         />
       </Box>
