@@ -162,6 +162,7 @@ export function TopBar({
         selectedVideo={selectedVideo}
         exportVideoOpen={exportVideoOpen}
         setExportVideoOpen={setExportVideoOpen}
+        playerRef={playerRef}
       />
     </>
   );

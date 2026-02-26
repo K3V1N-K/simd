@@ -3,7 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Backend/lib/ffmpeg"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

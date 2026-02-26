@@ -82,3 +82,50 @@ export async function fetchFile(path) {
     return 'error';
   }
 }
+
+export async function layerToImage(layer, layerNum) {
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/placeImg?name=l${layerNum}.jpg`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'text/plain',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: layer.drawingRef.current.getDataURL('image/jpeg').split(',')[1],
+      },
+    );
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    return '';
+  } catch (e) {
+    console.error('Failed response');
+    console.error(e);
+    return 'error';
+  }
+}
+
+export async function splitVideo(path, filename) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/splitVideo`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: path + filename,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    return await response.text();
+  } catch (e) {
+    console.error('Failed response');
+    console.error(e);
+    return 'error';
+  }
+}

@@ -17,34 +17,36 @@ import FolderIcon from '@mui/icons-material/Folder';
 import VideoFileIcon from '@mui/icons-material/VideoFile';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
-import { getFileInPath } from '../../services/services';
+import { getFileInPath, splitVideo } from '../../services/services';
+import { layerToImage } from '../../services/services';
 
-export function ExportVideoOptions({ layers, path, selectedVideo }) {
+export function ExportVideoOptions({ layers, path, selectedVideo, playerRef }) {
   const [simdMode, setSimdMode] = useState('scalar');
 
-  function onExport() {
-    console.log(layers, path, selectedVideo);
+  async function onExport() {
+    //layerToImage(layers[0]);
 
-    const images = [];
     for (const i in layers) {
-      let a = layers[i].drawingRef.current.getDataURL('image/jpeg');
-      console.log(a);
+      await layerToImage(layers[i], i);
     }
+
+    const res = await splitVideo(path, selectedVideo);
+    console.log(res);
   }
 
   return (
     <>
       <FormControl>
         <FormLabel>Processing Mode</FormLabel>
-        <RadioGroup defaultValue="female" name="radio-buttons-group">
-          <FormControlLabel value="female" control={<Radio />} label="Scalar" />
+        <RadioGroup defaultValue="Scalar" name="radio-buttons-group">
+          <FormControlLabel value="Scalar" control={<Radio />} label="Scalar" />
           <FormControlLabel
-            value="male"
+            value="avx256"
             control={<Radio />}
             label="SMID (AVX 256)"
           />
           <FormControlLabel
-            value="other"
+            value="avx512"
             control={<Radio />}
             label="SMID (AVX 512)"
           />

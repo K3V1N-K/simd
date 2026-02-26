@@ -7,7 +7,8 @@ Building Frontend
 
 Building Backend
 
-1. Use your preferred method to compile and run main.cpp using the c++ 17 standard (tested using g++ --std=c++17 main.cpp)
+1. navigate to backend/lib/ffmpeg and run './configure'
+2. navigate to backend/src and run g++ --std=c++17 -I../lib/ffmpeg main.cpp
 
 To run
 

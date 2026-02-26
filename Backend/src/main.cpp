@@ -2,6 +2,8 @@
 #include "routes/getVideo.hpp"
 #include "routes/hello.hpp"
 #include "routes/listFiles.hpp"
+#include "routes/placeImg.hpp"
+#include "routes/splitVideo.hpp"
 #include "routes/stop.hpp"
 
 #include <iostream>
@@ -18,19 +20,20 @@ int main() {
   httplib::Server svr;
 
   // preflight check for cross-origin
-  svr.Options("/(.*)",
-              [&](const httplib::Request &req, httplib::Response &res) {
-                res.set_header("Access-Control-Allow-Methods", CLIENT_URL);
-                res.set_header("Access-Control-Allow-Headers", CLIENT_URL);
-                res.set_header("Access-Control-Allow-Origin", CLIENT_URL);
-                res.set_header("Connection", "close");
-              });
+  svr.Options("/(.*)", [&](const httplib::Request &req, httplib::Response &res) {
+    res.set_header("Access-Control-Allow-Methods", "GET, PUT");
+    res.set_header("Access-Control-Allow-Headers", "*");
+    res.set_header("Access-Control-Allow-Origin", CLIENT_URL);
+    res.set_header("Connection", "close");
+  });
 
   // routes
   hello(CLIENT_URL, &svr, "/hi");
   stop(CLIENT_URL, &svr, "/stopserver");
   listFiles(CLIENT_URL, &svr, "/ls");
   getVideo(CLIENT_URL, &svr, "/video");
+  placeImg(CLIENT_URL, &svr, "/placeImg");
+  splitVideo(CLIENT_URL, &svr, "/splitVideo");
 
   // start server
   svr.listen(PATH, PORT);

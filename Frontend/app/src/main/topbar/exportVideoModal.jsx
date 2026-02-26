@@ -32,6 +32,7 @@ export function ExportVideoModal({
   layers,
   path,
   selectedVideo,
+  playerRef,
 }) {
   const [tab, setTab] = useState(0);
 
@@ -89,6 +90,7 @@ export function ExportVideoModal({
             layers={layers}
             path={path}
             selectedVideo={selectedVideo}
+            playerRef={playerRef}
           />
         ) : (
           <></>
