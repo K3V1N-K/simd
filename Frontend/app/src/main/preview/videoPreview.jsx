@@ -21,6 +21,7 @@ export function VideoPreview({
   playerRef,
   layers,
   activeLayerId,
+  brush,
 }) {
   const [videoReady, setVideoReady] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -80,6 +81,7 @@ export function VideoPreview({
         videoReady={videoReady}
         layers={layers}
         activeLayerId={activeLayerId}
+        brush={brush}
       />
 
       <Modal

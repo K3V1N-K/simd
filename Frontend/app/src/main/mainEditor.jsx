@@ -44,6 +44,7 @@ export function MainEditor({ setPage }) {
           setPath={setPath}
           selectedVideo={selectedVideo}
           setSelectedVideo={setSelectedVideo}
+          playerRef={playerRef}
         />
       </Box>
       <Box
@@ -58,6 +59,7 @@ export function MainEditor({ setPage }) {
             playerRef={playerRef}
             layers={layers}
             activeLayerId={activeLayerId}
+            brush={brush}
           />
         </Box>
         <Box width={`${toolBarWidth}em`}>

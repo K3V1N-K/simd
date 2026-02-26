@@ -14,18 +14,23 @@ import UndoIcon from '@mui/icons-material/Undo';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 
 export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
-  const [value, setValue] = useState([0, 1]);
+  const [currentLayer, setCurrentLayer] = useState(null);
 
   const handleChange = (_e, newValue) => {
     const newLayers = [...layers];
-    if (newValue[0] != null) newLayers[activeLayerId].start = newValue[0];
-    if (newValue[1] != null) newLayers[activeLayerId].end = newValue[1];
+
+    const newLayerEditing = newLayers.find(
+      (layer) => layer.id === activeLayerId,
+    );
+
+    if (newValue[0] != null) newLayerEditing.start = newValue[0];
+    if (newValue[1] != null) newLayerEditing.end = newValue[1];
 
     setLayers(newLayers);
   };
 
   useEffect(() => {
-    console.log(activeLayerId);
+    setCurrentLayer(layers.find((layer) => layer.id === activeLayerId));
   }, [activeLayerId]);
 
   return (
@@ -37,8 +42,8 @@ export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
         <Slider
           disabled={activeLayerId == undefined}
           value={
-            layers[activeLayerId]?.start && layers[activeLayerId]?.end
-              ? [layers[activeLayerId].start, layers[activeLayerId].end]
+            currentLayer != null
+              ? [currentLayer.start, currentLayer.end]
               : [0, 1]
           }
           onChange={handleChange}
@@ -46,8 +51,8 @@ export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
           min={0}
           max={playerRef?.current?.duration ?? 1}
           valueLabelFormat={(e) =>
-            playerRef?.current?.currentTime
-              ? `${String(Math.floor(playerRef.current.currentTime / 60)).padStart(2, '0')}:${String(Math.floor(playerRef.current.currentTime % 60)).padStart(2, '0')}`
+            currentLayer != null
+              ? `${String(Math.floor(e / 60)).padStart(2, '0')}:${String(Math.floor(e % 60)).padStart(2, '0')}`
               : '--:--'
           }
         />
@@ -57,7 +62,7 @@ export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
           title="Go to start"
           onClick={() => {
             if (playerRef?.current?.currentTime) {
-              playerRef.current.currentTime = layers[activeLayerId].start;
+              playerRef.current.currentTime = currentLayer.start;
             }
           }}
         >
@@ -94,7 +99,7 @@ export function VideoLocation({ layers, setLayers, activeLayerId, playerRef }) {
             disabled={activeLayerId == undefined}
             onClick={() => {
               if (playerRef?.current?.currentTime) {
-                playerRef.current.currentTime = layers[activeLayerId].end;
+                playerRef.current.currentTime = currentLayer.end;
               }
             }}
           >

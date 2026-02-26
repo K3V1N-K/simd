@@ -17,11 +17,13 @@ export function DrawingLayer({
   videoReady,
   layers,
   activeLayerId,
+  brush,
 }) {
   return (
     <>
       {layers.map((layer, i) => (
         <Box
+          key={i}
           sx={{
             position: 'relative',
             bottom: `calc((100vh - 4em)*${i + 1} - (3em * ${i}))`,
@@ -29,14 +31,21 @@ export function DrawingLayer({
             display: 'flex',
             justifyContent: 'center',
             pointerEvents: layer.id === activeLayerId ? 'auto' : 'none',
+            opacity:
+              videoPlayer.currentTime >= layer.start &&
+              videoPlayer.currentTime <= layer.end
+                ? 100
+                : 0,
           }}
         >
           {videoReady ? (
             <>
               <CanvasDraw
+                ref={layer.drawingRef}
                 hideGrid={true}
+                sx={{}}
                 hideInterface={layer.id != activeLayerId}
-                brushColor="red"
+                brushColor={brush.color}
                 canvasWidth={
                   videoPlayer?.clientWidth > 0
                     ? (videoPlayer.clientHeight * videoPlayer.videoWidth) /
