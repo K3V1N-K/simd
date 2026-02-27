@@ -18,7 +18,7 @@ void listFiles(const std::string allowedClients, httplib::Server *serverptr,
       if (fs::is_directory(path)) {
         for (const auto &entry : fs::directory_iterator(path)) {
           std::cout << entry.path() << '\n';
-          filesCsv += entry.path();
+          //filesCsv += entry.path();
           filesCsv += ",";
         }
       }

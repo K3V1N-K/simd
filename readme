@@ -14,3 +14,6 @@ To run
 1. start Backend
 2. start Frontend
 3. Go to http://localhost:5173/
+
+
+windows compile with g++ -std=c++17 main.cpp -lws2_32

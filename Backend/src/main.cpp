@@ -9,7 +9,7 @@
 const std::string PATH = "localhost";
 const int         PORT = 8080;
 
-const std::string CLIENT_URL = "http://localhost:5173"; // for CORS whitelist
+const std::string CLIENT_URL = "*"; // for CORS whitelist
 
 int main() {
   std::cout << "Starting Main";
