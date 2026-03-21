@@ -8,16 +8,15 @@ int main()
 {
     std::cout << "Starting test" << '\n';
     
-    const int x = 40000;
-    const int y = 40000;
+    const unsigned  int x = 192;
+    const unsigned  int y = 1080;
 
     std::vector<char> refImage(x * y);
 
-    for (int i = 0; i < x * y; i++)
+    for (unsigned  int i = 0; i < x * y; i++)
     {
         refImage[i] = 100;
     }
-    std::cout << refImage[0] << '\n';
 
     std::cout << "starting non simd test" << '\n';
     clock_t reg_start = clock();
@@ -28,8 +27,6 @@ int main()
     double reg_time = 0.0;
     reg_time = reg_time + (double)(reg_end - reg_start);
     reg_time = reg_time / CLOCKS_PER_SEC;
-    std::cout << "finished in " << reg_time << " sec" << '\n';
-
 
     std::cout << "starting simd test" << '\n';
 
@@ -39,11 +36,11 @@ int main()
     double simd_time = 0.0;
     simd_time = simd_time + (double)(simd_end - simd_start);
     simd_time = simd_time / CLOCKS_PER_SEC;
-    std::cout << "finished in " << simd_time << " sec" << '\n';
 
+    std::cout << " \n\n\n END OF TEST \n\n\n ";
 
-    std::cout << refImage[0] << '\n';
+    std::cout << "non simd finished in " << reg_time << " sec" << '\n';
+    std::cout << "simd finished in " << simd_time << " sec" << '\n';
 
-    std::cout << "Starting Finished" << '\n';
     ;
 }
