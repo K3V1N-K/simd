@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <chrono>
+#include <vector>
 
 void adjustBrightness(char image1[], int imageWidth, int imageHeight, char modif)
 {
