@@ -8,8 +8,6 @@ Draw on video is a program for CECS 574 to demostrate the speedup of AVX256. It 
 
 ### To test the SIMD speedup, go into the Filters folder and compile & run tester.cpp This will run the blend filter on two images already loaded into memory thus give the purest result of the speedup without needing to load them from disk.
 
-Note: Currently this is the only way to test SIMD functionality as filters are not implemented into the main program yet.
-
 ## Using the main program
 
 Compile and run the program using the instruction under "Compilation instruction". You will be greeted with a landing page with two buttons. If both buttons are disabled, it means the server isn't running. Once the server is running, you can click to top button to go to the main program. Here you can select a video from you computer, and select a video file to edit. To draw on the video first create a new layer using the "+" Icon on the top bar and use your mouse to draw on the video. "Star - End" Dictates when your drawing will start and end relative to the video, this is useful if you only want to draw on a section of the video.
