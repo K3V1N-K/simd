@@ -1,7 +1,7 @@
 
 #include <vector>
 
-void adjustBrightness(char image1[], int imageWidth, int imageHeight, float modif)
+void adjustBrightness(char image1[], int imageWidth, int imageHeight, char modif)
 {
 
     for (int i = 0; i < imageWidth * imageHeight; i++)
