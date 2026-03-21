@@ -9,7 +9,7 @@ export function BrushOptions({ brush, setBrush }) {
   };
   return (
     <>
-      <Divider sx={{ mt: 3 }}>Brush</Divider>
+      <Divider sx={{ mt: 0 }}>Brush</Divider>
       <Box
         sx={{
           display: 'flex',

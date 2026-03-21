@@ -2,7 +2,6 @@ import { Divider, Button, Box, IconButton, Tooltip } from '@mui/material';
 
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import SendIcon from '@mui/icons-material/Send';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import SimCardDownloadOutlinedIcon from '@mui/icons-material/SimCardDownloadOutlined';
@@ -12,6 +11,8 @@ import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import { MoreOptions } from './moreOptions';
 import { FilePicker } from './filepicker';
 import { useState } from 'react';
+import { LayersBar, LayersAddButton } from './layersBar';
+import { ExportVideoModal } from './exportVideoModal';
 
 export function TopBar({
   toolBarWidth,
@@ -25,11 +26,14 @@ export function TopBar({
   setPath,
   selectedVideo,
   setSelectedVideo,
+  playerRef,
 }) {
   const [moreIsOpen, setMoreIsOpen] = useState(false);
 
   const [filePickerOpen, setFilePickerOpen] = useState(false);
   const [filePickerMode, setFilePickerMode] = useState('');
+
+  const [exportVideoOpen, setExportVideoOpen] = useState(false);
 
   function handleSelectVideo() {
     setFilePickerMode('select');
@@ -38,16 +42,6 @@ export function TopBar({
 
   function toggleMoreIsOpen() {
     setMoreIsOpen(!moreIsOpen);
-  }
-
-  function newLayerHandler() {
-    setLayers([
-      ...layers,
-      {
-        name: 'New layer ' + layers.length,
-        id: layers.length,
-      },
-    ]);
   }
 
   return (
@@ -68,6 +62,10 @@ export function TopBar({
           <Button
             sx={{ mr: 1, maxHeight: '100%', textTransform: 'none' }}
             startIcon={<SendIcon />}
+            onClick={() => {
+              setExportVideoOpen(true);
+            }}
+            disabled={selectedVideo == '' || layers.length == 0}
           >
             Export video
           </Button>
@@ -98,30 +96,14 @@ export function TopBar({
               alignContent: 'center',
             }}
           >
-            {layers.map((layer) => (
-              <Button
-                key={layer.id}
-                color="success"
-                size="small"
-                sx={{ mr: 0.5, textTransform: 'none' }}
-                variant={activeLayerId == layer.id ? 'contained' : 'text'}
-                onClick={() => {
-                  setActiveLayerId(layer.id);
-                }}
-              >
-                {layer.name}
-              </Button>
-            ))}
+            <LayersBar
+              layers={layers}
+              setActiveLayerId={setActiveLayerId}
+              activeLayerId={activeLayerId}
+              playerRef={playerRef}
+            />
           </Box>
-          <Button
-            size="small"
-            color="success"
-            ml={1}
-            sx={{ p: 0 }}
-            onClick={newLayerHandler}
-          >
-            <AddCircleIcon />
-          </Button>
+          <LayersAddButton layers={layers} setLayers={setLayers} />
         </Box>
         <Tooltip
           title={
@@ -129,6 +111,7 @@ export function TopBar({
               toolBarWidth={toolBarWidth}
               setToolBarWidth={setToolBarWidth}
               setPage={setPage}
+              playerRef={playerRef}
             />
           }
           placement="bottom-end"
@@ -171,6 +154,14 @@ export function TopBar({
         setPath={setPath}
         selectedVideo={selectedVideo}
         setSelectedVideo={setSelectedVideo}
+      />
+
+      <ExportVideoModal
+        layers={layers}
+        path={path}
+        selectedVideo={selectedVideo}
+        exportVideoOpen={exportVideoOpen}
+        setExportVideoOpen={setExportVideoOpen}
       />
     </>
   );

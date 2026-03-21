@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { ToolBar } from './toolbar/toolBar';
 import { VideoPreview } from './preview/videoPreview';
 import { TopBar } from './topbar/topBar';
@@ -10,10 +10,12 @@ export function MainEditor({ setPage }) {
   const topBarHeight = '4em';
 
   const [layers, setLayers] = useState([]);
-  const [activeLayerId, setActiveLayerId] = useState();
+  const [activeLayerId, setActiveLayerId] = useState(null);
 
   const [path, setPath] = useState('./');
   const [selectedVideo, setSelectedVideo] = useState('');
+
+  const playerRef = useRef(null);
 
   const [brush, setBrush] = useState({
     color: '#ffffff',
@@ -42,6 +44,7 @@ export function MainEditor({ setPage }) {
           setPath={setPath}
           selectedVideo={selectedVideo}
           setSelectedVideo={setSelectedVideo}
+          playerRef={playerRef}
         />
       </Box>
       <Box
@@ -50,7 +53,14 @@ export function MainEditor({ setPage }) {
         style={{ height: `calc(100vh - ${topBarHeight})` }}
       >
         <Box style={{ width: `calc(100vw - ${toolBarWidth}em)` }}>
-          <VideoPreview />
+          <VideoPreview
+            path={path}
+            selectedVideo={selectedVideo}
+            playerRef={playerRef}
+            layers={layers}
+            activeLayerId={activeLayerId}
+            brush={brush}
+          />
         </Box>
         <Box width={`${toolBarWidth}em`}>
           <ToolBar
@@ -60,6 +70,7 @@ export function MainEditor({ setPage }) {
             setActiveLayerId={setActiveLayerId}
             brush={brush}
             setBrush={setBrush}
+            playerRef={playerRef}
           />
         </Box>
       </Box>

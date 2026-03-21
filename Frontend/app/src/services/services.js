@@ -60,3 +60,25 @@ export async function getFileInPath(path) {
     return 'error';
   }
 }
+
+export async function fetchFile(path) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/video?path=${path}`);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    console.log('video fetching');
+    console.log(response);
+
+    let text = await response.text();
+    let video = await response.video();
+
+    console.log(text);
+    console.log(video);
+    return '';
+  } catch (e) {
+    console.error('Failed response');
+    console.error(e);
+    return 'error';
+  }
+}
