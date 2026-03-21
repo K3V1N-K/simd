@@ -14,6 +14,12 @@ Compile and run the program using the instruction under "Compilation instruction
 
 ## Compilation instruction
 
+### Using the tester
+Go to the “Filters” folder ( cd ./Filters )
+Compile “tester.cpp” ( g++ tester.cpp ) 
+Run the output file
+
+
 ### Building Frontend
 
 1. Install NPM (on mac, easy way is to use Brew and Brew -i npm)
