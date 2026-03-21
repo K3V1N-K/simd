@@ -17,6 +17,8 @@ import {
   CircularProgress,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import TimerIcon from '@mui/icons-material/Timer';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -25,7 +27,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import { getFileInPath } from '../../services/services';
 
-export function ExportVideoProgress() {
+export function ExportVideoProgress({ uploadTasks, uploadDone, uploadTime }) {
   return (
     <>
       <Paper
@@ -43,9 +45,18 @@ export function ExportVideoProgress() {
       >
         <Box>
           <Typography variant="h6">Decoding</Typography>
-          <Typography variant="caption">Status: in progress (0/1)</Typography>
+          <Typography variant="caption">
+            {uploadTasks === 0 && `Waiting`}
+            {uploadTasks !== uploadDone &&
+              `In progress (${uploadDone}/${uploadTasks})`}
+            {uploadTime !== 0 && `Finished - ${uploadTime / 1000} seconds`}
+          </Typography>
         </Box>
-        <CircularProgress />
+        {uploadTasks === 0 && <TimerIcon />}
+        {uploadTasks !== uploadDone && <CircularProgress />}
+        {uploadTime !== 0 && (
+          <CheckCircleIcon fontSize="large" color="primary" />
+        )}
       </Paper>
 
       <Paper
@@ -69,7 +80,6 @@ export function ExportVideoProgress() {
         </Box>
         <CircularProgress />
       </Paper>
-
       <Paper
         backgroundColor="#ffffff"
         elevation={1}
@@ -87,7 +97,7 @@ export function ExportVideoProgress() {
           <Typography variant="h6">Encoding</Typography>
           <Typography variant="caption">Status: waiting...</Typography>
         </Box>
-        <CircularProgress />
+        <TimerIcon fontSize="large" backgroundColor="#fefefe" />
       </Paper>
     </>
   );

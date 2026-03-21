@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   Divider,
@@ -37,6 +37,31 @@ export function ExportVideoModal({
 
   function handleClose() {
     setExportVideoOpen(false);
+  }
+
+  const [uploadTasks, setUploadTasks] = useState(0);
+  const [uploadDone, setUploadDone] = useState(0);
+  const [uploadTime, setUploadTime] = useState(0);
+
+  async function executeExport() {
+    setUploadTasks(0);
+    setUploadDone(0);
+    setUploadTime(0);
+
+    setTab(1);
+
+    let timeStart, timeEnd;
+
+    //upload images
+    setUploadTasks(layers.length);
+    timeStart = performance.now();
+    for (const i in layers) {
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // call here
+      setUploadDone(parseInt(i) + 1);
+      console.log(uploadDone);
+    }
+    timeEnd = performance.now();
+    setUploadTime(timeEnd - timeStart);
   }
 
   return (
@@ -89,11 +114,20 @@ export function ExportVideoModal({
             layers={layers}
             path={path}
             selectedVideo={selectedVideo}
+            executeExport={executeExport}
           />
         ) : (
           <></>
         )}
-        {tab === 1 ? <ExportVideoProgress /> : <></>}
+        {tab === 1 ? (
+          <ExportVideoProgress
+            uploadTasks={uploadTasks}
+            uploadDone={uploadDone}
+            uploadTime={uploadTime}
+          />
+        ) : (
+          <></>
+        )}
       </Paper>
     </Modal>
   );

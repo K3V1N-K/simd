@@ -19,7 +19,12 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import { getFileInPath } from '../../services/services';
 
-export function ExportVideoOptions({ layers, path, selectedVideo }) {
+export function ExportVideoOptions({
+  executeExport,
+  layers,
+  path,
+  selectedVideo,
+}) {
   const [simdMode, setSimdMode] = useState('scalar');
 
   function onExport() {
@@ -50,9 +55,8 @@ export function ExportVideoOptions({ layers, path, selectedVideo }) {
           />
         </RadioGroup>
       </FormControl>
-      <Button sx={{ width: '100%' }} onClick={onExport}>
-        {' '}
-        Export{' '}
+      <Button sx={{ width: '100%' }} onClick={executeExport}>
+        Export Video
       </Button>
     </>
   );
